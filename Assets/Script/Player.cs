@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerDashState dashState { get; private set; }
+    public PlayerWallSlideState wallSlideState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
+    public PlayerPrimaryAttack primaryAttack { get; private set; }
     #endregion
 
     private void Awake()
@@ -48,6 +51,10 @@ public class Player : MonoBehaviour
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
         airState = new PlayerAirState(this, stateMachine, "Jump");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
+
+        primaryAttack = new PlayerPrimaryAttack(this, stateMachine, "Attack");
     }
 
     private void Start()
@@ -64,6 +71,8 @@ public class Player : MonoBehaviour
         CheckForDashInput();
     }
 
+    public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
@@ -71,7 +80,7 @@ public class Player : MonoBehaviour
     }
 
     public bool IsGroundDetected() => Physics2D.Raycast(grounCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, whatIsGround);
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
 
     private void OnDrawGizmos()
     {
@@ -100,6 +109,11 @@ public class Player : MonoBehaviour
 
     private void CheckForDashInput()
     {
+        if (IsWallDetected())
+        {
+            return;
+        }
+
         dashUsageTimer -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
