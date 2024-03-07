@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bool isBusy { get; private set; }
+
     [Header("Move Info")]
     public float moveSpeed;
     public float jumpForce;
@@ -14,6 +16,9 @@ public class Player : MonoBehaviour
     public float dashCooldown;
     public float dashDir { get; private set; }
     private float dashUsageTimer;
+
+    [Header("Attack Details")]
+    public Vector2[] attackMovement;
 
     [Header("Collision Info")]
     [SerializeField] private Transform grounCheck;
@@ -68,7 +73,15 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
+
         CheckForDashInput();
+    }
+
+    public IEnumerator BusyFor(float _seconds)
+    {
+        isBusy = true;
+        yield return new WaitForSeconds(_seconds);
+        isBusy = false;
     }
 
     public void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
