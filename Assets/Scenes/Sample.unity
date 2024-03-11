@@ -8328,6 +8328,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57cbbd1a4732604c85a82b4f1990308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grounCheck: {fileID: 174251073}
+  groundCheckDistance: 0.15
+  wallCheck: {fileID: 1187121154}
+  wallCheckDistance: 0.15
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
   moveSpeed: 8
   jumpForce: 12
   dashSpeed: 25
@@ -8337,13 +8344,6 @@ MonoBehaviour:
   - {x: 3, y: 1.5}
   - {x: 1, y: 2.5}
   - {x: 4, y: 1.5}
-  grounCheck: {fileID: 174251073}
-  groundCheckDistance: 0.15
-  wallCheck: {fileID: 1187121154}
-  wallCheckDistance: 0.15
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!50 &1839740046
 Rigidbody2D:
   serializedVersion: 4
