@@ -17,6 +17,8 @@ public class PlayerPrimaryAttackState : PlayerState
     {
         base.Enter();
 
+        xInput = 0;
+
         player.StartCoroutine("BusyFor", .15f);
 
 
