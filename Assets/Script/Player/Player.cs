@@ -20,12 +20,6 @@ public class Player : Entity
     [Header("Attack Details")]
     public Vector2[] attackMovement;
 
-
-
-
-
-
-
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
