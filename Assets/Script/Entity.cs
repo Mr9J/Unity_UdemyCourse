@@ -61,6 +61,8 @@ public class Entity : MonoBehaviour
 
         yield return new WaitForSeconds(knockbackDuration);
 
+        rb.velocity = new Vector2(0, 0);
+
         isKnocked = false;
     }
 

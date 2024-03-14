@@ -13,13 +13,13 @@ public class Player : Entity
     [Header("Dash Info")]
     public float dashSpeed;
     public float dashDuration;
-    public float dashCooldown;
     public float dashDir { get; private set; }
-    private float dashUsageTimer;
 
     [Header("Attack Details")]
     public Vector2[] attackMovement;
     public float counterAttackDuration;
+    public float counterAttackCooldown;
+    private float counterAttackUsageTimer;
 
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
@@ -66,6 +66,7 @@ public class Player : Entity
         stateMachine.currentState.Update();
 
         CheckForDashInput();
+        CheckForCounterAttackInput();
     }
 
     public IEnumerator BusyFor(float _seconds)
@@ -84,11 +85,8 @@ public class Player : Entity
             return;
         }
 
-        dashUsageTimer -= Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashUsageTimer < 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dash.CanUseSkill())
         {
-            dashUsageTimer = dashCooldown;
 
             dashDir = Input.GetAxisRaw("Horizontal");
 
@@ -98,6 +96,18 @@ public class Player : Entity
             }
 
             stateMachine.ChangeState(dashState);
+        }
+    }
+
+    private void CheckForCounterAttackInput()
+    {
+        counterAttackUsageTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Q) && counterAttackUsageTimer < 0)
+        {
+            counterAttackUsageTimer = counterAttackCooldown;
+
+            stateMachine.ChangeState(counterAttack);
         }
     }
 }
