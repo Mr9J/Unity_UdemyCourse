@@ -7,6 +7,7 @@ public class SkillManager : MonoBehaviour
     public static SkillManager instance;
 
     public Dash_Skill dash { get; private set; }
+    public CounterAttack_Skill counterAttack { get; private set; }
 
     private void Awake()
     {
@@ -23,5 +24,6 @@ public class SkillManager : MonoBehaviour
     private void Start()
     {
         dash = GetComponent<Dash_Skill>();
+        counterAttack=GetComponent<CounterAttack_Skill>();
     }
 }

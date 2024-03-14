@@ -18,8 +18,6 @@ public class Player : Entity
     [Header("Attack Details")]
     public Vector2[] attackMovement;
     public float counterAttackDuration;
-    public float counterAttackCooldown;
-    private float counterAttackUsageTimer;
 
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
@@ -101,12 +99,9 @@ public class Player : Entity
 
     private void CheckForCounterAttackInput()
     {
-        counterAttackUsageTimer -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Q) && counterAttackUsageTimer < 0)
+        if (Input.GetKeyDown(KeyCode.Q) && SkillManager.instance.counterAttack.CanUseSkill())
         {
-            counterAttackUsageTimer = counterAttackCooldown;
-
             stateMachine.ChangeState(counterAttack);
         }
     }
