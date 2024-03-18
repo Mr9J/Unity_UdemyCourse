@@ -8966,6 +8966,7 @@ MonoBehaviour:
     m_Bits: 8
   moveSpeed: 8
   jumpForce: 12
+  swordReturnImpact: 7
   dashSpeed: 25
   dashDuration: 0.2
   attackMovement:
