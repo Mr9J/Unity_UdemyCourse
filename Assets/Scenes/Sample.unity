@@ -7993,6 +7993,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1827377968}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1142736392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1142736393}
+  m_Layer: 6
+  m_Name: AimDotParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1142736393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142736392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1839740048}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1165921796
 GameObject:
   m_ObjectHideFlags: 0
@@ -8492,8 +8523,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0
   swordPrefab: {fileID: 5737675935225814719, guid: 1f7d06a6afd752e42aa910487a3aa8d2, type: 3}
-  launchDir: {x: 10, y: 5}
-  swordGravity: 2
+  launchForce: {x: 15, y: 20}
+  swordGravity: 4
+  numberOfDots: 20
+  spaceBetweenDots: 0.07
+  dotPrefab: {fileID: 7368612261151366633, guid: 724d194198474234cb4532a5c6264dc3, type: 3}
+  dotsParent: {fileID: 1142736393}
 --- !u!1 &1585453174
 GameObject:
   m_ObjectHideFlags: 0
@@ -8564,7 +8599,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1839740048}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 7
+    OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -8590,7 +8625,7 @@ Transform:
   m_GameObject: {fileID: 1642344898}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.667567, y: -0.31017128, z: -10.142708}
+  m_LocalPosition: {x: -5.667567, y: 0.8898288, z: -10.142708}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8659,7 +8694,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8684,7 +8719,7 @@ Transform:
   m_GameObject: {fileID: 1755416356}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.667567, y: -0.31017128, z: -10.142708}
+  m_LocalPosition: {x: -5.667567, y: 0.8898288, z: -10.142708}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9017,6 +9052,7 @@ Transform:
   - {fileID: 174251073}
   - {fileID: 1187121154}
   - {fileID: 1585453175}
+  - {fileID: 1142736393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1839740049
