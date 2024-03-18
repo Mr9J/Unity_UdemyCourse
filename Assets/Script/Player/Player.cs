@@ -19,6 +19,8 @@ public class Player : Entity
     public Vector2[] attackMovement;
     public float counterAttackDuration;
 
+    public GameObject sword { get; private set; }
+
     #region States
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
@@ -52,7 +54,7 @@ public class Player : Entity
         counterAttack = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
 
         aimSword = new PlayerAimSwordState(this, stateMachine, "AimSword");
-        catchSword = new PlayerCatchSwordState(this, stateMachine, "CatchSword");  
+        catchSword = new PlayerCatchSwordState(this, stateMachine, "CatchSword");
     }
 
     protected override void Start()
@@ -70,6 +72,16 @@ public class Player : Entity
 
         CheckForDashInput();
         CheckForCounterAttackInput();
+    }
+
+    public void AssignNewSword(GameObject _newSword)
+    {
+        sword = _newSword;
+    }
+
+    public void ClearTheSword()
+    {
+        Destroy(sword);
     }
 
     public IEnumerator BusyFor(float _seconds)
